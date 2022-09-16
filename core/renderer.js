@@ -1,5 +1,4 @@
 let rootNode = undefined
-let currentNode = undefined
 
 function render (root, virtualDOM) {
   traverse(virtualDOM.children)
@@ -8,28 +7,23 @@ function render (root, virtualDOM) {
 
 function traverse(tree, parentNode = undefined) {
   tree.forEach(node => {
+    let currentNode = undefined
 
     if (node.tag) {
       currentNode = document.createElement(node.tag)
-
       if (!rootNode) {
         rootNode = currentNode
-      } else if (parentNode){
-        parentNode.appendChild(currentNode)
-      } else {
-        rootNode.appendChild(currentNode)
       }
-
     } else {
-      currentNode.innerHTML = node
+      parentNode.innerHTML = node
     }
 
+    if (parentNode && currentNode) {
+      parentNode.appendChild(currentNode)
+    }
 
     if (node.children && node.children.length) {
-      parentNode = currentNode
-      traverse(node.children, parentNode)
-    } else {
-      parentNode = null
+      traverse(node.children, currentNode)
     }
   })
 }

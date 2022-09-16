@@ -7,8 +7,6 @@ const node = document.getElementById('root')
 
 const vDOM = virtualDOM.createVirtualDOM(template)
 
-console.log('vDom', vDOM)
-
 renderer.render(node, vDOM)
 
 // FirstComponent(core)
