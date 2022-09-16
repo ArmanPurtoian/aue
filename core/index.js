@@ -1,9 +1,14 @@
 import core from "./core";
-import TemplateEngine from "./virtualDOM";
+import virtualDOM from "./virtualDOM";
+import renderer from './renderer'
 
-const template = `<div><h1>Some text</h1><p>Some body</p></div>`
+const template = `<div><h1>Some text</h1><hr></hr><p><span>Some body</span></p><div><h2>Other text</h2></div></div>`
+const node = document.getElementById('root')
 
-const tree = TemplateEngine.createVirtualDOM(template)
-console.log(tree)
+const vDOM = virtualDOM.createVirtualDOM(template)
+
+console.log('vDom', vDOM)
+
+renderer.render(node, vDOM)
 
 // FirstComponent(core)
